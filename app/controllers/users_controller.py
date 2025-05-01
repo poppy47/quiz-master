@@ -51,7 +51,7 @@ def attempt_quiz(quiz_id):
 @login_required
 def quiz_results(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
-    score = Score.query.filter_by(user_id=current_user.id, quiz_id=quiz_id).first()
+    score = Score.query.filter_by(user_id=current_user.id, quiz_id=quiz_id).order_by(Score.id.desc()).first()
     return render_template("user/quiz_results.html", quiz=quiz, score=score)
 
 @users_bp.route("/leaderboard")
